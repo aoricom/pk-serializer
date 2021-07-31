@@ -4,7 +4,7 @@ namespace JMS\Serializer\Tests\Fixtures;
 
 use JMS\Serializer\Annotation\AccessType;
 use JMS\Serializer\Annotation\Exclude;
-use JMS\Serializer\Annotation\ReadOnly;
+use JMS\Serializer\Annotation\ReadOnlyProperty;
 use JMS\Serializer\Annotation\Type;
 
 /** @AccessType("public_method") */
@@ -17,7 +17,7 @@ class GetSetObject
     private $name = 'Foo';
 
     /**
-     * @ReadOnly
+     * @ReadOnlyProperty
      */
     private $readOnlyProperty = 42;
 

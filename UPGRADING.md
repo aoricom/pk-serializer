@@ -1,8 +1,8 @@
 From 0.13 to ???
 ================
 
-- If you have implemented your own ObjectConstructor, you need to add the DeserializationContext as an additional
-  parameter for the ``construct`` method.
+- Use symfony/cache for FileSystem cache implementation instead of doctrine/cache
+- Deprecated the `@ReadOnly` annotation due to `readonly` becoming a keyword in PHP 8.1, use the `@ReadOnlyProperty` annotation instead
 
 
 From 0.11 to 0.12
