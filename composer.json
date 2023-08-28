@@ -1,5 +1,5 @@
 {
-    "name": "jms/serializer",
+    "name": "aoricom/pk-serializer",
     "type": "library",
     "description": "Library for (de-)serializing data of any complexity; supports XML, and JSON.",
     "keywords": ["serialization", "deserialization", "json", "jaxb", "xml"],
