@@ -2,22 +2,21 @@
 
 namespace JMS\Serializer\Tests\Metadata\Driver;
 
+use JMS\Serializer\Exception\XmlErrorException;
 use JMS\Serializer\Metadata\Driver\XmlDriver;
 use JMS\Serializer\Metadata\PropertyMetadata;
 use Metadata\Driver\FileLocator;
 
 class XmlDriverTest extends BaseDriverTest
 {
-    /**
-     * @expectedException JMS\Serializer\Exception\XmlErrorException
-     * @expectedExceptionMessage [FATAL] Start tag expected, '<' not found
-     */
     public function testInvalidXml()
     {
         $driver = $this->getDriver();
 
         $ref = new \ReflectionMethod($driver, 'loadMetadataFromFile');
         $ref->setAccessible(true);
+        $this->expectException(XmlErrorException::class);
+        $this->expectExceptionMessage('[FATAL] Start tag expected, \'<\' not found');
         $ref->invoke($driver, new \ReflectionClass('stdClass'), __DIR__ . '/xml/invalid.xml');
     }
 
@@ -71,7 +70,8 @@ class XmlDriverTest extends BaseDriverTest
         $first = $this->getDriver()->loadMetadataForClass(new \ReflectionClass('JMS\Serializer\Tests\Fixtures\GroupsTrim'));
 
         $this->assertArrayHasKey('amount', $first->propertyMetadata);
-        $this->assertArraySubset(['first.test.group', 'second.test.group'], $first->propertyMetadata['currency']->groups);
+        $this->assertEmpty(array_diff_key(['first.test.group', 'second.test.group'], $first->propertyMetadata['currency']->groups));
+        $this->assertEmpty(array_diff_key($first->propertyMetadata['currency']->groups, ['first.test.group', 'second.test.group']));
     }
 
     public function testMultilineGroups()
@@ -79,7 +79,8 @@ class XmlDriverTest extends BaseDriverTest
         $first = $this->getDriver()->loadMetadataForClass(new \ReflectionClass('JMS\Serializer\Tests\Fixtures\MultilineGroupsFormat'));
 
         $this->assertArrayHasKey('amount', $first->propertyMetadata);
-        $this->assertArraySubset(['first.test.group', 'second.test.group'], $first->propertyMetadata['currency']->groups);
+        $this->assertEmpty(array_diff_key(['first.test.group', 'second.test.group'], $first->propertyMetadata['currency']->groups));
+        $this->assertEmpty(array_diff_key($first->propertyMetadata['currency']->groups, ['first.test.group', 'second.test.group']));
     }
 
     protected function getDriver()

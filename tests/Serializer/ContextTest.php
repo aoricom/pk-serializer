@@ -8,8 +8,9 @@ use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\Tests\Fixtures\InlineChild;
 use JMS\Serializer\Tests\Fixtures\Node;
+use PHPUnit\Framework\TestCase;
 
-class ContextTest extends \PHPUnit_Framework_TestCase
+class ContextTest extends TestCase
 {
     public function testSerializationContextPathAndDepth()
     {

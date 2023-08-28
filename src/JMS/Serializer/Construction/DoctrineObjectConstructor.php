@@ -2,7 +2,7 @@
 
 namespace JMS\Serializer\Construction;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use JMS\Serializer\AbstractVisitor;
 use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\Exception\InvalidArgumentException;

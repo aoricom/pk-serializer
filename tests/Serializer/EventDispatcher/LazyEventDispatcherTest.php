@@ -8,7 +8,7 @@ abstract class LazyEventDispatcherTest extends EventDispatcherTest
 {
     protected $container;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->container = $this->createContainer();
 

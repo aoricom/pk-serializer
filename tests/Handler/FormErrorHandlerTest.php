@@ -6,6 +6,7 @@ use JMS\Serializer\Handler\FormErrorHandler;
 use JMS\Serializer\JsonSerializationVisitor;
 use JMS\Serializer\Naming\CamelCaseNamingStrategy;
 use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormBuilder;
@@ -13,7 +14,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Translation\Translator;
 
-class FormErrorHandlerTest extends \PHPUnit_Framework_TestCase
+class FormErrorHandlerTest extends TestCase
 {
     /**
      * @var \JMS\Serializer\Handler\FormErrorHandler
@@ -35,7 +36,7 @@ class FormErrorHandlerTest extends \PHPUnit_Framework_TestCase
      */
     protected $factory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->handler = new FormErrorHandler(new Translator('en'));
         $this->visitor = new JsonSerializationVisitor(new SerializedNameAnnotationStrategy(new CamelCaseNamingStrategy()));
@@ -43,7 +44,7 @@ class FormErrorHandlerTest extends \PHPUnit_Framework_TestCase
         $this->factory = $this->getMockBuilder('Symfony\Component\Form\FormFactoryInterface')->getMock();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->handler = null;
         $this->visitor = null;

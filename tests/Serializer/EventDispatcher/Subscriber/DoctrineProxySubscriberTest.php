@@ -11,8 +11,9 @@ use JMS\Serializer\Tests\Fixtures\SimpleObject;
 use JMS\Serializer\Tests\Fixtures\SimpleObjectProxy;
 use JMS\Serializer\VisitorInterface;
 use Metadata\MetadataFactoryInterface;
+use PHPUnit\Framework\TestCase;
 
-class DoctrineProxySubscriberTest extends \PHPUnit_Framework_TestCase
+class DoctrineProxySubscriberTest extends TestCase
 {
     /** @var VisitorInterface */
     private $visitor;
@@ -125,7 +126,7 @@ class DoctrineProxySubscriberTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(['name' => SimpleObject::class, 'params' => ['baz']], $event->getType());
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subscriber = new DoctrineProxySubscriber();
         $this->visitor = $this->getMockBuilder('JMS\Serializer\Context')->getMock();

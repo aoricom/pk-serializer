@@ -6,18 +6,19 @@ use JMS\Serializer\Exclusion\ExpressionLanguageExclusionStrategy;
 use JMS\Serializer\Expression\ExpressionEvaluator;
 use JMS\Serializer\Metadata\StaticPropertyMetadata;
 use JMS\Serializer\SerializationContext;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Asmir Mustafic <goetas@gmail.com>
  */
-class ExpressionLanguageExclusionStrategyTest extends \PHPUnit_Framework_TestCase
+class ExpressionLanguageExclusionStrategyTest extends TestCase
 {
     private $visitedObject;
     private $context;
     private $expressionEvaluator;
     private $exclusionStrategy;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->visitedObject = new \stdClass();
 

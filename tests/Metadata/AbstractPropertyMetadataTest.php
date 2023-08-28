@@ -2,7 +2,9 @@
 
 namespace JMS\Serializer\Tests\Metadata;
 
-abstract class AbstractPropertyMetadataTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+abstract class AbstractPropertyMetadataTest extends TestCase
 {
     protected function setNonDefaultMetadataValues($metadata)
     {

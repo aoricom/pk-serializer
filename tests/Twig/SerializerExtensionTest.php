@@ -5,8 +5,9 @@ namespace JMS\Serializer\Tests\Twig;
 use JMS\Serializer\Twig\SerializerExtension;
 use JMS\Serializer\Twig\SerializerRuntimeExtension;
 use JMS\Serializer\Twig\SerializerRuntimeHelper;
+use PHPUnit\Framework\TestCase;
 
-class SerializerExtensionTest extends \PHPUnit_Framework_TestCase
+class SerializerExtensionTest extends TestCase
 {
     public function testSerialize()
     {

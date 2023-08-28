@@ -7,10 +7,11 @@ use JMS\Serializer\EventDispatcher\EventDispatcher;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\EventDispatcher\Subscriber\SymfonyValidatorSubscriber;
 use JMS\Serializer\SerializerBuilder;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 
-class SymfonyValidatorSubscriberTest extends \PHPUnit_Framework_TestCase
+class SymfonyValidatorSubscriberTest extends TestCase
 {
     private $validator;
 
@@ -31,12 +32,10 @@ class SymfonyValidatorSubscriberTest extends \PHPUnit_Framework_TestCase
         $this->subscriber->onPostDeserialize(new ObjectEvent($context, $obj, array()));
     }
 
-    /**
-     * @expectedException JMS\Serializer\Exception\ValidationFailedException
-     * @expectedExceptionMessage Validation failed with 1 error(s).
-     */
     public function testValidateThrowsExceptionWhenListIsNotEmpty()
     {
+        $this->expectExceptionMessage("Validation failed with 1 error(s).");
+        $this->expectException(\JMS\Serializer\Exception\ValidationFailedException::class);
         $obj = new \stdClass;
 
         $this->validator->expects($this->once())
@@ -80,7 +79,7 @@ class SymfonyValidatorSubscriberTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $list);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!interface_exists('Symfony\Component\Validator\ValidatorInterface')) {
             $this->markTestSkipped('Symfony\Component\Validator\ValidatorInterface is not available');

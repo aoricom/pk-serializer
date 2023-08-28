@@ -3,8 +3,9 @@
 namespace JMS\Serializer\Tests\Serializer\Naming;
 
 use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
+use PHPUnit\Framework\TestCase;
 
-class IdenticalPropertyNamingStrategyTest extends \PHPUnit_Framework_TestCase
+class IdenticalPropertyNamingStrategyTest extends TestCase
 {
     public function providePropertyNames()
     {

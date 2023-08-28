@@ -15,8 +15,9 @@ use JMS\Serializer\Tests\Fixtures\Discriminator\ObjectWithXmlNamespaceDiscrimina
 use JMS\Serializer\Tests\Fixtures\Discriminator\ObjectWithXmlNamespaceDiscriminatorParent;
 use JMS\Serializer\Tests\Fixtures\ParentSkipWithEmptyChild;
 use Metadata\Driver\DriverInterface;
+use PHPUnit\Framework\TestCase;
 
-abstract class BaseDriverTest extends \PHPUnit_Framework_TestCase
+abstract class BaseDriverTest extends TestCase
 {
     public function testLoadBlogPostMetadata()
     {

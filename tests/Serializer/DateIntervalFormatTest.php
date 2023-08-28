@@ -3,8 +3,9 @@
 namespace JMS\Serializer\Tests\Serializer;
 
 use JMS\Serializer\Handler\DateHandler;
+use PHPUnit\Framework\TestCase;
 
-class DateIntervalFormatTest extends \PHPUnit_Framework_TestCase
+class DateIntervalFormatTest extends TestCase
 {
     public function testFormat()
     {

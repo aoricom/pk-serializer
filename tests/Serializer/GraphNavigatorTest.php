@@ -10,8 +10,9 @@ use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\Metadata\Driver\AnnotationDriver;
 use Metadata\MetadataFactory;
+use PHPUnit\Framework\TestCase;
 
-class GraphNavigatorTest extends \PHPUnit_Framework_TestCase
+class GraphNavigatorTest extends TestCase
 {
     private $metadataFactory;
     private $handlerRegistry;
@@ -20,12 +21,10 @@ class GraphNavigatorTest extends \PHPUnit_Framework_TestCase
     private $navigator;
     private $context;
 
-    /**
-     * @expectedException JMS\Serializer\Exception\RuntimeException
-     * @expectedExceptionMessage Resources are not supported in serialized data.
-     */
     public function testResourceThrowsException()
     {
+        $this->expectExceptionMessage("Resources are not supported in serialized data.");
+        $this->expectException(\JMS\Serializer\Exception\RuntimeException::class);
         $this->context->expects($this->any())
             ->method('getDirection')
             ->will($this->returnValue(GraphNavigator::DIRECTION_SERIALIZATION));
@@ -130,7 +129,7 @@ class GraphNavigatorTest extends \PHPUnit_Framework_TestCase
         $this->navigator->accept($object, null, $this->context);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->context = $this->getMockBuilder('JMS\Serializer\Context')->getMock();
         $this->dispatcher = new EventDispatcher();

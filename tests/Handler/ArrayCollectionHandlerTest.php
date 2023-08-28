@@ -9,8 +9,9 @@ use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Tests\Fixtures\ExclusionStrategy\AlwaysExcludeExclusionStrategy;
 use JMS\Serializer\VisitorInterface;
 use Metadata\MetadataFactoryInterface;
+use PHPUnit\Framework\TestCase;
 
-class ArrayCollectionHandlerTest extends \PHPUnit_Framework_TestCase
+class ArrayCollectionHandlerTest extends TestCase
 {
     public function testSerializeArray()
     {

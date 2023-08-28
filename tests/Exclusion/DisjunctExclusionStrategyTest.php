@@ -6,8 +6,9 @@ use JMS\Serializer\Exclusion\DisjunctExclusionStrategy;
 use JMS\Serializer\Metadata\ClassMetadata;
 use JMS\Serializer\Metadata\StaticPropertyMetadata;
 use JMS\Serializer\SerializationContext;
+use PHPUnit\Framework\TestCase;
 
-class DisjunctExclusionStrategyTest extends \PHPUnit_Framework_TestCase
+class DisjunctExclusionStrategyTest extends TestCase
 {
     public function testShouldSkipClassShortCircuiting()
     {

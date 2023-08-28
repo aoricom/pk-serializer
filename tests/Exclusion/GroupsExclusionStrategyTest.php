@@ -5,8 +5,9 @@ namespace JMS\Serializer\Tests\Exclusion;
 use JMS\Serializer\Exclusion\GroupsExclusionStrategy;
 use JMS\Serializer\Metadata\StaticPropertyMetadata;
 use JMS\Serializer\SerializationContext;
+use PHPUnit\Framework\TestCase;
 
-class GroupsExclusionStrategyTest extends \PHPUnit_Framework_TestCase
+class GroupsExclusionStrategyTest extends TestCase
 {
     /**
      * @dataProvider getExclusionRules

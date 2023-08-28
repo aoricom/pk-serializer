@@ -4,12 +4,13 @@ namespace JMS\Serializer\Tests\Handler;
 
 use JMS\Serializer\GraphNavigator;
 use JMS\Serializer\Handler\HandlerRegistry;
+use PHPUnit\Framework\TestCase;
 
-class HandlerRegistryTest extends \PHPUnit_Framework_TestCase
+class HandlerRegistryTest extends TestCase
 {
     protected $handlerRegistry;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->handlerRegistry = $this->createHandlerRegistry();
     }

@@ -4,8 +4,7 @@ namespace JMS\Serializer\Tests\Serializer\Doctrine;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\Reader;
-use Doctrine\Common\Persistence\AbstractManagerRegistry;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\AbstractManagerRegistry;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\Configuration;
@@ -16,12 +15,15 @@ use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\UnitOfWork;
 use Doctrine\ORM\Version as ORMVersion;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\Proxy;
 use JMS\Serializer\Builder\CallbackDriverFactory;
 use JMS\Serializer\Builder\DefaultDriverFactory;
 use JMS\Serializer\Construction\DoctrineObjectConstructor;
 use JMS\Serializer\Construction\ObjectConstructorInterface;
 use JMS\Serializer\Construction\UnserializeObjectConstructor;
 use JMS\Serializer\DeserializationContext;
+use JMS\Serializer\Exception\ObjectConstructionException;
 use JMS\Serializer\Metadata\ClassMetadata;
 use JMS\Serializer\Metadata\Driver\DoctrineTypeDriver;
 use JMS\Serializer\Serializer;
@@ -31,8 +33,9 @@ use JMS\Serializer\Tests\Fixtures\Doctrine\Embeddable\BlogPostSeo;
 use JMS\Serializer\Tests\Fixtures\Doctrine\IdentityFields\Server;
 use JMS\Serializer\Tests\Fixtures\Doctrine\SingleTableInheritance\Excursion;
 use JMS\Serializer\VisitorInterface;
+use PHPUnit\Framework\TestCase;
 
-class ObjectConstructorTest extends \PHPUnit_Framework_TestCase
+class ObjectConstructorTest extends TestCase
 {
     /** @var ManagerRegistry */
     private $registry;
@@ -145,9 +148,6 @@ class ObjectConstructorTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($author, $authorFetched);
     }
 
-    /**
-     * @expectedException \JMS\Serializer\Exception\ObjectConstructionException
-     */
     public function testMissingAuthorException()
     {
         $fallback = $this->getMockBuilder(ObjectConstructorInterface::class)->getMock();
@@ -155,13 +155,11 @@ class ObjectConstructorTest extends \PHPUnit_Framework_TestCase
         $type = array('name' => Author::class, 'params' => array());
         $class = new ClassMetadata(Author::class);
 
+        $this->expectException(ObjectConstructionException::class);
         $constructor = new DoctrineObjectConstructor($this->registry, $fallback, DoctrineObjectConstructor::ON_MISSING_EXCEPTION);
         $constructor->construct($this->visitor, $class, ['id' => 5], $type, $this->context);
     }
 
-    /**
-     * @expectedException \JMS\Serializer\Exception\InvalidArgumentException
-     */
     public function testInvalidArg()
     {
         $fallback = $this->getMockBuilder(ObjectConstructorInterface::class)->getMock();
@@ -169,6 +167,7 @@ class ObjectConstructorTest extends \PHPUnit_Framework_TestCase
         $type = array('name' => Author::class, 'params' => array());
         $class = new ClassMetadata(Author::class);
 
+        $this->expectException(\JMS\Serializer\Exception\InvalidArgumentException::class);
         $constructor = new DoctrineObjectConstructor($this->registry, $fallback, 'foo');
         $constructor->construct($this->visitor, $class, ['id' => 5], $type, $this->context);
     }
@@ -243,7 +242,7 @@ class ObjectConstructorTest extends \PHPUnit_Framework_TestCase
         $constructor->construct($this->visitor, $class, array('metaTitle' => 'test'), $type, $this->context);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->visitor = $this->getMockBuilder('JMS\Serializer\VisitorInterface')->getMock();
         $this->context = $this->getMockBuilder('JMS\Serializer\DeserializationContext')->getMock();
@@ -357,7 +356,7 @@ class SimpleBaseManagerRegistry extends AbstractManagerRegistry
     private $services = array();
     private $serviceCreator;
 
-    public function __construct($serviceCreator, $name = 'anonymous', array $connections = array('default' => 'default_connection'), array $managers = array('default' => 'default_manager'), $defaultConnection = null, $defaultManager = null, $proxyInterface = 'Doctrine\Common\Persistence\Proxy')
+    public function __construct($serviceCreator, $name = 'anonymous', array $connections = array('default' => 'default_connection'), array $managers = array('default' => 'default_manager'), $defaultConnection = null, $defaultManager = null, $proxyInterface = Proxy::class)
     {
         if (null === $defaultConnection) {
             $defaultConnection = key($connections);
