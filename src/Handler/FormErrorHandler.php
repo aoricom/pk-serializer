@@ -10,7 +10,7 @@ use JMS\Serializer\XmlSerializationVisitor;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface as TranslatorContract;
 
 use function get_class;
@@ -18,7 +18,7 @@ use function get_class;
 final class FormErrorHandler implements SubscribingHandlerInterface
 {
     /**
-     * @var TranslatorInterface|TranslatorContract|null
+     * @var TranslatorInterface|null
      */
     private $translator;
 
