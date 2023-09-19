@@ -110,10 +110,6 @@ class FormErrorHandler implements SubscribingHandlerInterface
             return $error->getMessage();
         }
 
-        if (null !== $error->getMessagePluralization()) {
-            return $this->translator->transChoice($error->getMessageTemplate(), $error->getMessagePluralization(), $error->getMessageParameters(), $this->translationDomain);
-        }
-
         return $this->translator->trans($error->getMessageTemplate(), $error->getMessageParameters(), $this->translationDomain);
     }
 
