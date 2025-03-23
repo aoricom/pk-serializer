@@ -27,28 +27,8 @@
     "conflict": {
         "twig/twig": "<1.12"
     },
-    "suggest": {
-        "symfony/yaml": "Required if you'd like to serialize data to YAML format.",
-        "doctrine/collections": "Required if you like to use doctrine collection types as ArrayCollection.",
-        "doctrine/cache": "Required if you like to use cache functionality."
-    },
     "require-dev": {
-        "ext-pdo_sqlite": "*",
-        "twig/twig": "~1.12|~2.0",
-        "doctrine/orm": "~2.1",
-        "doctrine/dbal": "2.12.0",
-        "jackalope/jackalope-doctrine-dbal": "^1.1.5",
-        "doctrine/phpcr-odm": "^1.3|^2.0",
-        "propel/propel1": "~1.7",
-        "psr/container": "^1.0",
-        "symfony/dependency-injection": "^2.7|^3.3|^4.0",
-        "symfony/yaml": "^2.1|^3.0",
-        "symfony/translation": "^2.1|^3.0",
-        "symfony/validator": "^2.2|^3.0",
-        "symfony/form": "~2.1|^3.0",
-        "symfony/filesystem": "^2.1",
-        "symfony/expression-language": "^2.6|^3.0",
-        "phpunit/phpunit": "^10.0"
+
     },
     "autoload": {
         "psr-0": {
@@ -73,5 +53,10 @@
         {
             "packagist.org": false
         }
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": false
+        }
+    }
 }
