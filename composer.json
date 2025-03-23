@@ -64,5 +64,14 @@
         "branch-alias": {
             "dev-1.x": "1.14-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://flexus.bank24.int/repository/composer-public/"
+        },
+        {
+            "packagist.org": false
+        }
+    ]
 }
