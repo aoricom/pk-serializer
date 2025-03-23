@@ -1,5 +1,5 @@
 {
-    "name": "svc_reklama/pk-serializer",
+    "name": "tochka/pk-serializer",
     "type": "library",
     "description": "Library for (de-)serializing data of any complexity; supports XML, JSON, and YAML.",
     "keywords": ["serialization", "deserialization", "json", "jaxb", "xml"],
