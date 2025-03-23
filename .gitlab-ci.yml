@@ -9,6 +9,7 @@ include:
 
 variables:
   PHP_VERSION: "8.2-bookworm"
+  FLEXUS_REPOSITORY: 'svc_reklama'
 
 stages:
   - test
