@@ -1,0 +1,32 @@
+include:
+  - project: 'php/deploy/gitlabci-template'
+    file:
+      - '/gitlab/tpl.test.yml'
+      - '/gitlab/tpl.package.flexus.yml'
+      - '/gitlab/tpl.release.yml'
+      - '/gitlab/tpl.pint.yml'
+      - '/gitlab/tpl.psalm.yml'
+
+variables:
+  PHP_VERSION: "8.2-bookworm"
+
+stages:
+#  - test
+  - release
+  - deploy
+
+#test:
+#  extends: .test
+#  parallel:
+#    matrix:
+#      - PHP_VERSION: [ "8.2-bookworm" ]
+
+code_style:
+  extends: .pint
+
+release:
+  extends: .release
+
+#deploy.flexus:
+#  extends: .package.flexus
+
